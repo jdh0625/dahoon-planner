@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>신원리조트 앤 호텔 | 영종도</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --deep: #1a2e42;
+    --ocean: #1e4d6b;
+    --teal: #2a7f8f;
+    --gold: #c8a96e;
+    --gold-light: #e8cfa0;
+    --cream: #f5f0e8;
+    --white: #ffffff;
+    --text-dark: #1a1a2e;
+    --text-mid: #4a4a6a;
+    --text-light: #8a8aaa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--ocean) 60%, var(--teal) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 24px 80px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 120%, rgba(42,127,143,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(200,169,110,0.12) 0%, transparent 60%);
+  }
+
+  .wave-bg {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: var(--cream);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .hero-badge {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 7vw, 52px);
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 8px;
+  }
+
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: clamp(14px, 3vw, 20px);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 28px;
+    letter-spacing: 1px;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    text-align: center;
+    max-width: 280px;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 40px;
+  }
+
+  /* scroll cue */
+  .scroll-cue {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.45);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-cue svg { opacity: 0.5; }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  /* ── NAV ── */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,27,42,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,169,110,0.2);
+    padding: 0 16px;
+  }
+
+  .nav-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-item {
+    flex-shrink: 0;
+    padding: 14px 14px;
+    color: rgba(255,255,255,0.55);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+  .nav-item:hover, .nav-item.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 64px 24px;
+  }
+
+  .section-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 11px;
+    color: var(--teal);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .section-line {
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 32px;
+    border-radius: 2px;
+  }
+
+  /* ── CHECK IN/OUT ── */
+  #checkin { background: var(--cream); }
+
+  .time-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .time-card {
+    background: var(--navy);
+    border-radius: 20px;
+    padding: 32px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .time-card::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(200,169,110,0.08);
+  }
+
+  .time-card-label {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .time-card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .time-card-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .time-card-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.5;
+  }
+
+  /* ── PARKING ── */
+  #parking { background: #f0ede6; }
+
+  .info-box {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 28px 24px;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+
+  .info-box-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .badge-free {
+    background: linear-gradient(135deg, var(--teal), var(--ocean));
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .info-text {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.85;
+  }
+
+  .notice-box {
+    margin-top: 16px;
+    background: linear-gradient(135deg, rgba(200,169,110,0.12), rgba(200,169,110,0.05));
+    border: 1px solid rgba(200,169,110,0.35);
+    border-radius: 14px;
+    padding: 16px 20px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .notice-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+
+  .notice-text {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  .notice-text strong { color: var(--navy); }
+
+  /* ── BREAKFAST ── */
+  #breakfast { background: var(--cream); }
+
+  .restaurant-card {
+    background: var(--navy);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(13,27,42,0.2);
+  }
+
+  .restaurant-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .restaurant-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold-light);
+    margin-bottom: 4px;
+  }
+
+  .restaurant-type {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+  }
+
+  .schedule-list {
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .schedule-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .schedule-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-gold { background: var(--gold); }
+  .dot-teal { background: var(--teal); }
+
+  .schedule-info { flex: 1; }
+
+  .schedule-meal {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .schedule-detail {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .schedule-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* ── FAQ ── */
+  #faq { background: #f0ede6; }
+
+  .faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .faq-item {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+  }
+  .faq-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    gap: 12px;
+  }
+
+  .faq-q-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .faq-q-mark {
+    background: linear-gradient(135deg, var(--ocean), var(--teal));
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .faq-chevron {
+    width: 20px; height: 20px;
+    flex-shrink: 0;
+    color: var(--text-light);
+    transition: transform 0.3s;
+  }
+
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .faq-item.open .faq-answer { max-height: 300px; }
+
+  .faq-answer-inner {
+    padding: 0 20px 20px 52px;
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.85;
+  }
+
+  /* ── ATTRACTIONS ── */
+  #attractions { background: var(--cream); }
+
+  .attraction-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .attraction-card {
+    background: var(--white);
+    border-radius: 18px;
+    padding: 20px 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-top: 3px solid transparent;
+  }
+  .attraction-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .attraction-card:nth-child(1) { border-top-color: var(--teal); }
+  .attraction-card:nth-child(2) { border-top-color: var(--gold); }
+  .attraction-card:nth-child(3) { border-top-color: var(--ocean); }
+  .attraction-card:nth-child(4) { border-top-color: #e07a5f; }
+  .attraction-card:nth-child(5) { border-top-color: #81b29a; }
+  .attraction-card:nth-child(6) { border-top-color: #f2cc8f; }
+
+  .attraction-emoji { font-size: 28px; margin-bottom: 10px; }
+  .attraction-name {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .attraction-desc {
+    font-size: 12px;
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: linear-gradient(160deg, var(--navy), var(--ocean));
+    padding: 0;
+  }
+
+  .contact-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 64px 24px;
+    text-align: center;
+  }
+
+  .contact-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .contact-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .contact-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(200,169,110,0.25);
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-decoration: none;
+    transition: background 0.25s;
+  }
+  .contact-card:hover { background: rgba(255,255,255,0.12); }
+
+  .contact-icon {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .contact-info { text-align: left; }
+
+  .contact-type {
+    font-size: 11px;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .contact-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--white);
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+
+  .contact-hint {
+    margin-top: 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 24px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.8;
+  }
+
+  /* ── DIVIDERS ── */
+  .section-divider {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 24px;
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.07);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Yeongjongdo · Incheon</div>
+  <h1 class="hero-title">신원리조트<br>앤 호텔</h1>
+  <p class="hero-sub">Shinwon Resort & Hotel</p>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">영종도의 아름다운 자연 속에서<br>편안한 휴식과 특별한 경험을 드립니다</p>
+  <div class="scroll-cue">
+    <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path d="M19 9l-7 7-7-7"/>
+    </svg>
+    SCROLL
+  </div>
+  <div class="wave-bg"></div>
+</section>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <div class="nav-inner">
+    <a href="#checkin" class="nav-item">입·퇴실</a>
+    <a href="#parking" class="nav-item">주차</a>
+    <a href="#breakfast" class="nav-item">조식</a>
+    <a href="#faq" class="nav-item">FAQ</a>
+    <a href="#attractions" class="nav-item">주변관광</a>
+    <a href="#contact" class="nav-item">문의</a>
+  </div>
+</nav>
+
+<!-- CHECK IN / OUT -->
+<section class="section" id="checkin">
+  <div class="section-label">Check-in & Check-out</div>
+  <h2 class="section-title">입실 · 퇴실 안내</h2>
+  <div class="section-line"></div>
+  <div class="time-cards">
+    <div class="time-card">
+      <div class="time-card-label">입실</div>
+      <div class="time-card-icon">🏨</div>
+      <div class="time-card-time">15:00</div>
+      <div class="time-card-desc">Check-in<br>오후 3시부터</div>
+    </div>
+    <div class="time-card">
+      <div class="time-card-label">퇴실</div>
+      <div class="time-card-icon">🔑</div>
+      <div class="time-card-time">11:00</div>
+      <div class="time-card-desc">Check-out<br>오전 11시까지</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARKING -->
+<section class="section" id="parking" style="background:#f0ede6;">
+  <div class="section-label">Parking</div>
+  <h2 class="section-title">주차 시스템</h2>
+  <div class="section-line"></div>
+  <div class="info-box">
+    <div class="info-box-title">
+      주차 안내
+      <span class="badge-free">무료</span>
+    </div>
+    <p class="info-text">투숙 기간 동안 <strong>무료 주차</strong>를 제공해 드립니다.<br>편리하게 이용해 주세요.</p>
+  </div>
+  <div class="notice-box" style="margin-top:16px;">
+    <div class="notice-icon">⚠️</div>
+    <div class="notice-text">
+      퇴실 전 반드시 하단에 기재된 <strong>010-7932-8230</strong>으로 연락 주시기 바랍니다.<br>
+      연락 없이 장시간 주차 시 불편이 발생할 수 있습니다.
+    </div>
+  </div>
+</section>
+
+<!-- BREAKFAST -->
+<section class="section" id="breakfast">
+  <div class="section-label">Breakfast</div>
+  <h2 class="section-title">조식 안내</h2>
+  <div class="section-line"></div>
+  <div class="restaurant-card">
+    <div class="restaurant-header">
+      <div class="restaurant-name">씨앤비치하우스</div>
+      <div class="restaurant-type">C&Beach House · 양식 레스토랑</div>
+    </div>
+    <div class="schedule-list">
+      <div class="schedule-item">
+        <div class="schedule-dot dot-gold"></div>
+        <div class="schedule-info">
+          <div class="schedule-meal">조식 뷔페</div>
+          <div class="schedule-detail">양식 뷔페 운영</div>
+        </div>
+        <div class="schedule-time">06:30 – 10:30</div>
+      </div>
+      <div class="schedule-item">
+        <div class="schedule-dot dot-teal"></div>
+        <div class="schedule-info">
+          <div class="schedule-meal">단품 메뉴</div>
+          <div class="schedule-detail">양식 단품 운영 (10:30 이후)</div>
+        </div>
+        <div class="schedule-time">10:30 – 14:30</div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:12px; color:rgba(255,255,255,0.4);">레스토랑 마감</span>
+        <span style="font-family:'Playfair Display',serif; font-size:14px; color:rgba(255,255,255,0.5);">15:00 Close</span>
+      </div>
+    </div>
+  </div>
+  <!-- 요금 안내 -->
+  <div style="margin-top:14px; background:linear-gradient(135deg,rgba(200,169,110,0.15),rgba(200,169,110,0.05)); border:1px solid rgba(200,169,110,0.35); border-radius:16px; padding:18px 20px; display:flex; align-items:center; gap:14px;">
+    <div style="font-size:26px;">🍽️</div>
+    <div>
+      <div style="font-size:11px; color:var(--gold); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">이용 요금</div>
+      <div style="font-family:'Noto Serif KR',serif; font-size:18px; font-weight:700; color:var(--navy);">대인 / 소인 &nbsp;<span style="color:var(--teal);">14,000원</span></div>
+      <div style="font-size:12px; color:var(--text-light); margin-top:3px;">1인 기준 · 뷔페 이용 시</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq" style="background:#f0ede6;">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title">자주 묻는 질문</h2>
+  <div class="section-line"></div>
+  <div class="faq-list">
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">
+          <span class="faq-q-mark">Q</span>
+          체크인 / 체크아웃 시간이 어떻게 되나요?
+        </div>
+        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">입실은 오후 <strong>15:00</strong>부터, 퇴실은 오전 <strong>11:00</strong>까지입니다. 일찍 도착하시는 경우 짐 보관 서비스를 이용하실 수 있습니다.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">
+          <span class="faq-q-mark">Q</span>
+          주차는 유료인가요?
+        </div>
+        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">주차는 <strong>무료</strong>로 제공됩니다. 단, 퇴실 전 반드시 <strong>010-7932-8230</strong>으로 연락 주시기 바랍니다.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">
+          <span class="faq-q-mark">Q</span>
+          조식은 어떻게 운영되나요?
+        </div>
+        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">씨앤비치하우스에서 오전 <strong>06:30~10:30</strong>까지 양식 뷔페로 운영됩니다. 10:30 이후에는 단품 메뉴(양식)로 전환되며, 레스토랑은 <strong>14:30</strong>에 주문이 마감되고 <strong>15:00</strong>에 닫습니다.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">
+          <span class="faq-q-mark">Q</span>
+          공항과의 접근성은 어떤가요?
+        </div>
+        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">영종도에 위치하여 <strong>인천국제공항</strong>과 매우 가깝습니다. 공항 이용 전후 편리하게 투숙하시기 좋습니다.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <div class="faq-q-text">
+          <span class="faq-q-mark">Q</span>
+          기타 문의는 어떻게 하나요?
+        </div>
+        <svg class="faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">하단의 <strong>010-7932-8230</strong>으로 문자 또는 전화 문의 주시면 신속히 안내해 드립니다.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ATTRACTIONS -->
+<section class="section" id="attractions">
+  <div class="section-label">Nearby Attractions</div>
+  <h2 class="section-title">영종도 주변 관광지</h2>
+  <div class="section-line"></div>
+  <div class="attraction-grid">
+    <div class="attraction-card">
+      <div class="attraction-emoji">🎡</div>
+      <div class="attraction-name">파라다이스시티</div>
+      <div class="attraction-desc">복합 리조트 · 카지노 · 스파 · 아트테인먼트</div>
+    </div>
+    <div class="attraction-card">
+      <div class="attraction-emoji">🛍️</div>
+      <div class="attraction-name">롯데프리미엄아울렛</div>
+      <div class="attraction-desc">공항 인근 대형 쇼핑 아울렛</div>
+    </div>
+    <div class="attraction-card">
+      <div class="attraction-emoji">🌊</div>
+      <div class="attraction-name">을왕리 해수욕장</div>
+      <div class="attraction-desc">영종도 대표 해변 · 서해 낙조 명소</div>
+    </div>
+    <div class="attraction-card">
+      <div class="attraction-emoji">🦀</div>
+      <div class="attraction-name">왕산해수욕장</div>
+      <div class="attraction-desc">조용한 해변 · 해산물 식당가</div>
+    </div>
+    <div class="attraction-card">
+      <div class="attraction-emoji">⛽</div>
+      <div class="attraction-name">영종 씨사이드레일바이크</div>
+      <div class="attraction-desc">바다를 달리는 레일바이크 체험</div>
+    </div>
+    <div class="attraction-card">
+      <div class="attraction-emoji">🐟</div>
+      <div class="attraction-name">영종도 용유어촌계</div>
+      <div class="attraction-desc">갯벌 체험 · 신선한 해산물</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-label">Contact Us</div>
+    <h2 class="contact-title">기타 문의</h2>
+    <a class="contact-card" href="tel:01079328230">
+      <div class="contact-icon">📞</div>
+      <div class="contact-info">
+        <div class="contact-type">고객 문의 · 예약 상담</div>
+        <div class="contact-number">010-7932-8230</div>
+      </div>
+    </a>
+    <p class="contact-hint">전화 또는 문자로 문의 주시면<br>빠르게 답변드리겠습니다</p>
+  </div>
+</section>
+
+<!-- QR 생성 -->
+<section style="background:var(--cream); padding:48px 24px;">
+  <div style="max-width:600px; margin:0 auto; text-align:center;">
+    <div style="font-family:'Playfair Display',serif; font-style:italic; font-size:11px; color:var(--teal); letter-spacing:3px; text-transform:uppercase; margin-bottom:10px;">QR Code Generator</div>
+    <h2 style="font-family:'Noto Serif KR',serif; font-size:20px; font-weight:700; color:var(--navy); margin-bottom:6px;">QR 코드 생성</h2>
+    <p style="font-size:13px; color:var(--text-light); margin-bottom:24px; line-height:1.7;">이 페이지의 도메인 주소를 입력하면<br>QR 코드를 바로 생성할 수 있습니다</p>
+    <div style="display:flex; gap:10px; max-width:480px; margin:0 auto 16px;">
+      <input id="qrUrlInput" type="url" placeholder="https://예시.com/shinwon_resort_guide.html"
+        style="flex:1; padding:14px 18px; border:1.5px solid rgba(13,27,42,0.15); border-radius:12px; font-size:13px; font-family:'Noto Sans KR',sans-serif; color:var(--navy); outline:none; background:var(--white); transition:border 0.2s;"
+        onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='rgba(13,27,42,0.15)'">
+      <button onclick="openQR()"
+        style="flex-shrink:0; padding:14px 22px; background:linear-gradient(135deg,var(--ocean),var(--teal)); color:white; border:none; border-radius:12px; font-size:13px; font-weight:600; font-family:'Noto Sans KR',sans-serif; cursor:pointer; white-space:nowrap; transition:opacity 0.2s;"
+        onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        QR 생성 →
+      </button>
+    </div>
+    <p style="font-size:11px; color:var(--text-light);">* 버튼 클릭 시 QR 코드 생성 사이트로 이동합니다</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>신원리조트 앤 호텔 · Shinwon Resort & Hotel</div>
+  <div>영종도 · Yeongjongdo, Incheon</div>
+</footer>
+
+<script>
+  function openQR() {
+    const url = document.getElementById('qrUrlInput').value.trim();
+    if (!url) { alert('도메인 주소를 입력해 주세요.'); return; }
+    const target = 'https://qrcodecreator.com/?url=' + encodeURIComponent(url);
+    window.open(target, '_blank');
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Nav active highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navItems = document.querySelectorAll('.nav-item');
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navItems.forEach(n => n.classList.remove('active'));
+        const active = document.querySelector(`.nav-item[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
